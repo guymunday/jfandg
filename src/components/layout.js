@@ -27,7 +27,7 @@ export default function Layout({ children }) {
       <GlobalStyles />
       <HeroNavigation setContactOpen={setContactOpen} />
       <main className="page-wrapper">{children}</main>
-      {/* <InstaFeed /> */}
+      <InstaFeed />
       {contactOpen && <Contact setContactOpen={setContactOpen} />}
     </>
   )
