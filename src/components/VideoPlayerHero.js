@@ -89,13 +89,21 @@ const ScrubberContainer = styled.div`
 export default function VideoPlayer({ video }) {
   const playerRef = React.useRef(null)
   const playerFullScreenRef = React.useRef(null)
+
   const [isFullScreen, setIsFullScreen] = React.useState(false)
+  const [hasMounted, setHasMounted] = React.useState(false)
+
   const [isPlaying, setIsPlaying] = React.useState({
     playing: true,
     volume: 0,
     played: 0,
     seeking: false,
   })
+
+  React.useEffect(() => {
+    setHasMounted(true)
+    console.log(hasMounted, "mounted")
+  }, [])
 
   const { playing, volume, played } = isPlaying
 
@@ -144,26 +152,28 @@ export default function VideoPlayer({ video }) {
           background: isFullScreen ? "rgba(0,0,0,0)" : "rgba(0,0,0,0.3)",
         }}
       >
-        <ReactPlayer
-          ref={playerRef}
-          url={currentVideo}
-          playing={playing}
-          volume={volume}
-          onProgress={handleProgress}
-          width={"100%"}
-          height={"100%"}
-          loop={true}
-          className="react-player"
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: isFullScreen
-              ? "translate(-50%, -50%) scale(1)"
-              : "translate(-50%, -50%) scale(1.5)",
-            zIndex: -1,
-          }}
-        />
+        {hasMounted && (
+          <ReactPlayer
+            ref={playerRef}
+            url={currentVideo}
+            playing={playing}
+            volume={volume}
+            onProgress={handleProgress}
+            width={"100%"}
+            height={"100%"}
+            loop={true}
+            className="react-player"
+            style={{
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: isFullScreen
+                ? "translate(-50%, -50%) scale(1)"
+                : "translate(-50%, -50%) scale(1.5)",
+              zIndex: -1,
+            }}
+          />
+        )}
         <ScrubberContainer>
           <div className="scrubber-inner">
             <ControlButton onClick={handleIsPlaying}>

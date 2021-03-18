@@ -42,7 +42,7 @@ export default function HeroNavigation({ setContactOpen }) {
     <>
       <HeroNavigationStyles>
         <VideoPlayerHero video="https://vimeo.com/277725209" />
-        <HeroMenu setContactOpen={setContactOpen} />
+        {/* <HeroMenu setContactOpen={setContactOpen} /> */}
         <Heading>
           JF&G Picture Studios <br />
           <span className="tilda script">Presents</span>
