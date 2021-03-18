@@ -1,55 +1,34 @@
-/**
- * Layout component that queries for data
- * with Gatsby's useStaticQuery component
- *
- * See: https://www.gatsbyjs.com/docs/use-static-query/
- */
-
 import * as React from "react"
-import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { Helmet } from "react-helmet"
+import { createGlobalStyle } from "styled-components"
+import reset from "../styles/reset"
+import global from "../styles/global"
+import "../styles/fonts.css"
+import HeroNavigation from "./HeroNavigation"
+import InstaFeed from "./InstaFeed"
+import Contact from "./Contact"
 
-import Header from "./header"
-import "./layout.css"
+const GlobalStyles = createGlobalStyle`
+${reset}
+${global}
+`
 
-const Layout = ({ children }) => {
-  const data = useStaticQuery(graphql`
-    query SiteTitleQuery {
-      site {
-        siteMetadata {
-          title
-        }
-      }
-    }
-  `)
-
+export default function Layout({ children }) {
+  const [contactOpen, setContactOpen] = React.useState(false)
   return (
     <>
-      <Header siteTitle={data.site.siteMetadata?.title || `Title`} />
-      <div
-        style={{
-          margin: `0 auto`,
-          maxWidth: 960,
-          padding: `0 1.0875rem 1.45rem`,
-        }}
-      >
-        <main>{children}</main>
-        <footer
-          style={{
-            marginTop: `2rem`,
-          }}
-        >
-          © {new Date().getFullYear()}, Built with
-          {` `}
-          <a href="https://www.gatsbyjs.com">Gatsby</a>
-        </footer>
-      </div>
+      <Helmet>
+        <link
+          href="//cloud.typenetwork.com/projects/5383/fontface.css/"
+          rel="stylesheet"
+          type="text/css"
+        ></link>
+      </Helmet>
+      <GlobalStyles />
+      <HeroNavigation setContactOpen={setContactOpen} />
+      <main className="page-wrapper">{children}</main>
+      {/* <InstaFeed /> */}
+      {contactOpen && <Contact setContactOpen={setContactOpen} />}
     </>
   )
 }
-
-Layout.propTypes = {
-  children: PropTypes.node.isRequired,
-}
-
-export default Layout

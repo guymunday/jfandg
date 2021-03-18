@@ -1,7 +1,11 @@
-/**
- * Implement Gatsby's Browser APIs in this file.
- *
- * See: https://www.gatsbyjs.com/docs/browser-apis/
- */
+import * as React from "react"
+import Layout from "./src/components/Layout"
+import { GlobalVideoProvider } from "./src/context/videoContext"
 
-// You can delete this file if you're not using it
+export const wrapPageElement = ({ element, props }) => {
+  return <Layout {...props}>{element}</Layout>
+}
+
+export const wrapRootElement = ({ element }) => {
+  return <GlobalVideoProvider>{element}</GlobalVideoProvider>
+}

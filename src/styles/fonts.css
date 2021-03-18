@@ -1,0 +1,9 @@
+@font-face {
+  font-family: "Neutraface Bold";
+  src: url("../assets/fonts/Neutraface_display-bold.woff") format("woff");
+}
+
+@font-face {
+  font-family: "Neutraface Book";
+  src: url("../assets/fonts/NeutrafaceText-Book.woff") format("woff");
+}
