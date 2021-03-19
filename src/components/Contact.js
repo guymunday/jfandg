@@ -65,7 +65,7 @@ const ContactStyles = styled.section`
   }
 `
 
-export default function Contact({ setContactOpen }) {
+export default function Contact({ setContactOpen, toggleContactOpen }) {
   const contactData = useStaticQuery(graphql`
     {
       contact: datoCmsContact {
@@ -76,10 +76,10 @@ export default function Contact({ setContactOpen }) {
 
   return (
     <>
-      <ContactStyles>
+      <ContactStyles id="contact">
         <ControlButton
           style={{ position: "absolute", right: 30, top: 30 }}
-          onClick={() => setContactOpen(false)}
+          onClick={toggleContactOpen}
         >
           <Close />
         </ControlButton>
@@ -89,13 +89,14 @@ export default function Contact({ setContactOpen }) {
             html={contactData?.contact?.copy}
             className="contact-copy"
           />
-          <form>
+          <form     method="POST"
+              data-netlify="true">
             <input
               type="text"
               placeholder="NAME"
               name="Name"
-              method="POST"
-              data-netlify="true"
+          
+              required
             />
             <input type="email" placeholder="EMAIL" name="Email" />
             <textarea placeholder="MESSAGE" name="Message" />

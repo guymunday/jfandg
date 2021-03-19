@@ -1,8 +1,9 @@
 import * as React from "react"
 import { createContext, useReducer, useContext } from "react"
+import { graphql, useStaticQuery } from "gatsby"
 
 let initialVideoState = {
-  currentVideo: "https://vimeo.com/277725209",
+  currentVideo: "",
 }
 
 const VideoStateContext = createContext(initialVideoState)
@@ -23,8 +24,18 @@ const videoReducer = (state, action) => {
 }
 
 export const GlobalVideoProvider = ({ children }) => {
+  const videoData = useStaticQuery(graphql`
+    {
+      video: datoCmsHeroVideo {
+        heroVideo {
+          url
+        }
+      }
+    }
+  `)
+
   const [state, dispatch] = useReducer(videoReducer, {
-    currentVideo: "https://vimeo.com/277725209",
+    currentVideo: videoData?.video?.heroVideo?.url,
   })
 
   return (

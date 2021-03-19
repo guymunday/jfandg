@@ -6,6 +6,10 @@ import { GatsbyImage } from "gatsby-plugin-image"
 const BlockStyles = styled.div`
   display: grid;
   grid-template-columns: 1fr 1fr;
+  @media screen and (max-width: 768px) {
+    grid-template-columns: 1fr;
+    grid-template-rows: auto;
+  }
   .copy {
     align-self: center;
     max-width: 500px;

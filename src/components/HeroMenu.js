@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEffect } from "react"
 import styled from "styled-components"
 import { graphql, Link, useStaticQuery } from "gatsby"
-import gsap from "gsap"
+import { gsap } from "gsap"
 import { navigate, useLocation } from "@reach/router"
 
 const HeroMenuStyles = styled.nav`
@@ -42,7 +42,7 @@ const HeroButton = styled.button`
   }
 `
 
-export default function HeroMenu({ setContactOpen }) {
+export default function HeroMenu({ setContactOpen, toggleContactOpen }) {
   useEffect(() => {
     gsap.from(".hero-link", {
       x: -300,
@@ -85,8 +85,8 @@ export default function HeroMenu({ setContactOpen }) {
                 <HeroButton
                   className="hero-link"
                   onClick={async () => {
+                    await navigate(`/${item?.node?.slug}`)
                     await pageChangeAnimation()
-                    await navigate(`/${item?.node?.slug}/`)
                   }}
                   style={{
                     color:
@@ -100,10 +100,7 @@ export default function HeroMenu({ setContactOpen }) {
           )
         })}
         <div className="text-container">
-          <HeroButton
-            onClick={() => setContactOpen(true)}
-            className="hero-link"
-          >
+          <HeroButton onClick={toggleContactOpen} className="hero-link">
             Contact
           </HeroButton>
         </div>

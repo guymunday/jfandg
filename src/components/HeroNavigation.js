@@ -37,12 +37,15 @@ const Logo = styled.div`
   }
 `
 
-export default function HeroNavigation({ setContactOpen }) {
+export default function HeroNavigation({ setContactOpen, toggleContactOpen }) {
   return (
     <>
       <HeroNavigationStyles>
         <VideoPlayerHero video="https://vimeo.com/277725209" />
-        {/* <HeroMenu setContactOpen={setContactOpen} /> */}
+        <HeroMenu
+          setContactOpen={setContactOpen}
+          toggleContactOpen={toggleContactOpen}
+        />
         <Heading>
           JF&G Picture Studios <br />
           <span className="tilda script">Presents</span>

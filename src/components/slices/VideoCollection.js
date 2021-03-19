@@ -11,6 +11,9 @@ const VideoGrid = styled.section`
 
 const VideoThumbnail = styled.div`
   width: 50%;
+  @media screen and (max-width: 768px) {
+    width: 100%;
+  }
   &:nth-child(3n + 3) {
     width: 100%;
   }
@@ -56,9 +59,12 @@ export default function VideoCollection({ data }) {
 
           return (
             <>
-              <VideoThumbnail key={i} onClick={handleVideoUpdate}>
+              <VideoThumbnail
+                key={i}
+                onClick={handleVideoUpdate}
+              >
                 <div className="video-image">
-                  <img src={v?.videoUrl?.thumbnailUrl} />
+                  <img src={v?.videoUrl?.thumbnailUrl} alt={v?.videoUrl?.url} />
                 </div>
                 <div className="video-copy">
                   <SanitisedHtml center html={v?.copy} />

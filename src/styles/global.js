@@ -4,7 +4,6 @@ const globalCss = css`
   html {
     min-height: 100vh;
     min-height: -webkit-fill-available;
-    position: relative;
   }
 
   body {
