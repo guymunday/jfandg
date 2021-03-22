@@ -65,7 +65,7 @@ const ContactStyles = styled.section`
   }
 `
 
-export default function Contact({ setContactOpen, toggleContactOpen }) {
+export default function Contact({ toggleContactOpen }) {
   const contactData = useStaticQuery(graphql`
     {
       contact: datoCmsContact {

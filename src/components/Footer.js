@@ -3,6 +3,7 @@ import { Facebook } from "@styled-icons/entypo-social/Facebook"
 import * as React from "react"
 import styled from "styled-components"
 import jfandgLogo from "../assets/images/JF&G-pictures-white.svg"
+import { graphql, useStaticQuery } from "gatsby"
 
 const FooterStyles = styled.footer`
   padding: 30px;
@@ -35,6 +36,16 @@ const FooterStyles = styled.footer`
 `
 
 export default function Footer() {
+  const footerData = useStaticQuery(graphql`
+    {
+      links: datoCmsContact {
+        facebookLink
+        instagramLink
+        twitterLink
+      }
+    }
+  `)
+
   return (
     <>
       <FooterStyles>
@@ -43,15 +54,33 @@ export default function Footer() {
             <img src={jfandgLogo} alt="JF&G Pictures logo" />
           </div>
           <div className="footer-social-icons">
-            <a href className="footer-icon">
-              <Twitter />
-            </a>
-            <a href className="footer-icon">
-              <Facebook />
-            </a>
-            <a href className="footer-icon">
-              <Instagram />
-            </a>
+            {footerData?.links?.twitterLink && (
+              <a
+                href={footerData?.links?.twitterLink}
+                target="_blank"
+                className="footer-icon"
+              >
+                <Twitter />
+              </a>
+            )}
+            {footerData?.links?.facebookLink && (
+              <a
+                href={footerData?.links?.facebookLink}
+                target="_blank"
+                className="footer-icon"
+              >
+                <Facebook />
+              </a>
+            )}
+            {footerData?.links?.instagramLink && (
+              <a
+                href={footerData?.links?.instagramLink}
+                target="_blank"
+                className="footer-icon"
+              >
+                <Instagram />
+              </a>
+            )}
           </div>
         </div>
         <p className="copyright">© JF&G Pictures {new Date().getFullYear()}</p>

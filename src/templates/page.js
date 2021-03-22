@@ -2,7 +2,9 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import SliceZone from "../components/slices/SliceZone"
 import styled from "styled-components"
-import { gsap } from "gsap"
+import { gsap, ScrollToPlugin, ScrollTrigger } from "gsap/all"
+
+gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
 
 const PageHeader = styled.div`
   padding: 60px 30px;
@@ -14,8 +16,13 @@ export default function Page({ location, data }) {
   React.useEffect(() => {
     let tl = gsap.timeline()
 
+    gsap.to(window, {
+      scrollTo: 150,
+      duration: 1,
+    })
+
     tl.to(pageRef.current, {
-      y: -150,
+      y: -50,
       duration: 1,
     }).to(pageRef.current, {
       y: 0,

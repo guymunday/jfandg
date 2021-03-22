@@ -3,6 +3,7 @@ import Feed from "react-instagram-authless-feed"
 import styled from "styled-components"
 import ErrorBoundary from "./ErrorBoundary"
 import { Instagram } from "@styled-icons/bootstrap"
+import { graphql, useStaticQuery } from "gatsby"
 
 const StyledFeed = styled(Feed)`
   max-width: 1000px;
@@ -46,6 +47,14 @@ const StyledFeed = styled(Feed)`
 `
 
 export default function InstaFeed() {
+  const instaData = useStaticQuery(graphql`
+    {
+      link: datoCmsContact {
+        instagramLink
+      }
+    }
+  `)
+
   return (
     <div
       style={{
@@ -60,7 +69,11 @@ export default function InstaFeed() {
       >
         Follow us
       </h2>
-      <a href style={{ margin: "40px auto", width: 40, display: "block" }}>
+      <a
+        href={instaData?.link?.instagramLink}
+        target="_blank"
+        style={{ margin: "40px auto", width: 40, display: "block" }}
+      >
         <Instagram />
       </a>
       <ErrorBoundary>
