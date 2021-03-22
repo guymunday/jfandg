@@ -20,13 +20,15 @@ export default function Layout({ children }) {
 
   const toggleContactOpen = () => {
     if (contactOpen) {
-      let tl = gsap.timeline({ onComplete: () => setContactOpen(false) })
-      tl.to("#contact", { x: 100, duration: 1 })
-      tl.to("#contact", { y: 50, duration: 1 })
+      async function close() {
+        await gsap.to("#contact", { yPercent: 100, duration: 1 })
+        await setContactOpen(false)
+      }
+      close()
     } else {
       async function open() {
         await setContactOpen(true)
-        await gsap.from("#contact", { x: 100, duration: 1 })
+        await gsap.from("#contact", { yPercent: 100, duration: 1 })
       }
       open()
     }
@@ -47,7 +49,7 @@ export default function Layout({ children }) {
         toggleContactOpen={toggleContactOpen}
       />
       <main className="page-wrapper">{children}</main>
-      {/* <InstaFeed /> */}
+      <InstaFeed />
       <Footer />
       {contactOpen && (
         <Contact

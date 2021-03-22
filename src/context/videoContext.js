@@ -27,7 +27,7 @@ export const GlobalVideoProvider = ({ children }) => {
   const videoData = useStaticQuery(graphql`
     {
       video: datoCmsHeroVideo {
-        heroVideo {
+        trailerVideo {
           url
         }
       }
@@ -35,7 +35,7 @@ export const GlobalVideoProvider = ({ children }) => {
   `)
 
   const [state, dispatch] = useReducer(videoReducer, {
-    currentVideo: videoData?.video?.heroVideo?.url,
+    currentVideo: videoData?.video?.trailerVideo?.url,
   })
 
   return (

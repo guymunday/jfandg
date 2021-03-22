@@ -17,8 +17,8 @@ export default class ErrorBoundary extends React.Component {
   render() {
     if (this.state.hasError) {
       return (
-        <h3 style={{ textAlign: "center" }}>
-          Something went wrong fetching our instagram feed.
+        <h3 className="tilda" style={{ textAlign: "center", fontSize: "2rem" }}>
+          Something went wrong fetching our instagram feed
         </h3>
       )
     }

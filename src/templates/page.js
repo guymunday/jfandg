@@ -2,19 +2,42 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import SliceZone from "../components/slices/SliceZone"
 import styled from "styled-components"
+import { gsap } from "gsap"
 
 const PageHeader = styled.div`
   padding: 60px 30px;
   text-align: center;
 `
 
-export default function Page({ data }) {
+export default function Page({ location, data }) {
+  const pageRef = React.useRef(null)
+  React.useEffect(() => {
+    let tl = gsap.timeline()
+
+    tl.to(pageRef.current, {
+      y: -150,
+      duration: 1,
+    }).to(pageRef.current, {
+      y: 0,
+      duration: 1,
+    })
+  }, [location])
+
   return (
     <>
-      <PageHeader>
-        <h1 className="tilda">{data?.page?.title}</h1>
-      </PageHeader>
-      <SliceZone slices={data?.page?.contentBlocks} />
+      <div
+        ref={pageRef}
+        style={{
+          background: "#000",
+          zIndex: 9,
+          position: "relative",
+        }}
+      >
+        <PageHeader>
+          <h1 className="tilda">{data?.page?.title}</h1>
+        </PageHeader>
+        <SliceZone slices={data?.page?.contentBlocks} />
+      </div>
     </>
   )
 }
@@ -25,6 +48,19 @@ export const PAGE_QUERY = graphql`
       slug
       title
       contentBlocks {
+        ... on DatoCmsImage {
+          model {
+            name
+          }
+          caption
+          image {
+            gatsbyImageData(
+              layout: FULL_WIDTH
+              placeholder: BLURRED
+              forceBlurhash: false
+            )
+          }
+        }
         ... on DatoCmsCopy {
           copy
           model {
@@ -37,6 +73,7 @@ export const PAGE_QUERY = graphql`
             name
           }
           image {
+            alt
             gatsbyImageData(
               layout: FULL_WIDTH
               placeholder: BLURRED
@@ -50,6 +87,7 @@ export const PAGE_QUERY = graphql`
             name
           }
           image {
+            alt
             gatsbyImageData(
               layout: FULL_WIDTH
               placeholder: BLURRED

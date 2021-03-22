@@ -6,6 +6,9 @@ import jfandgLogo from "../assets/images/JF&G-pictures-white.svg"
 
 const FooterStyles = styled.footer`
   padding: 30px;
+  background: #000;
+  z-index: 9;
+  position: relative;
   .footer-inner {
     width: 100%;
     display: flex;
@@ -51,7 +54,7 @@ export default function Footer() {
             </a>
           </div>
         </div>
-        <p className="copyright">copyright {new Date().getFullYear()}</p>
+        <p className="copyright">© JF&G Pictures {new Date().getFullYear()}</p>
       </FooterStyles>
     </>
   )

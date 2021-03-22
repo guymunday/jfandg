@@ -9,7 +9,8 @@ const globalCss = css`
   body {
     --sans-bold: "Neutraface Bold", sans-serif;
     --sans-book: "Neutraface Book", sans-serif;
-    overflow-x: hidden;
+    --gold: #aa8e5c;
+    /* overflow-x: hidden; */
     width: 100%;
     min-height: 100vh;
     min-height: -webkit-fill-available;
@@ -118,9 +119,23 @@ const globalCss = css`
     padding: 10px;
     border: 1px solid white;
     cursor: pointer;
+    text-decoration: none;
+    display: inline-block;
+    text-align: center;
     :hover {
-      color: gold;
+      color: var(--gold);
       background: white;
+    }
+  }
+
+  a {
+    color: inherit;
+    transition: 0.2s ease color;
+    font-size: inherit;
+    font-family: inherit;
+    cursor: pointer;
+    :hover {
+      color: var(--gold);
     }
   }
 `

@@ -2,8 +2,12 @@ import * as React from "react"
 import Feed from "react-instagram-authless-feed"
 import styled from "styled-components"
 import ErrorBoundary from "./ErrorBoundary"
+import { Instagram } from "@styled-icons/bootstrap"
 
 const StyledFeed = styled(Feed)`
+  max-width: 1000px;
+  margin: auto;
+  padding: 30px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   grid-template-rows: auto;
@@ -43,13 +47,30 @@ const StyledFeed = styled(Feed)`
 
 export default function InstaFeed() {
   return (
-    <ErrorBoundary>
-      <StyledFeed
-        userName="jfandg"
-        className="Feed"
-        classNameLoading="Loading"
-        limit="9"
-      />
-    </ErrorBoundary>
+    <div
+      style={{
+        background: "#000",
+        zIndex: 9,
+        position: "relative",
+      }}
+    >
+      <h2
+        className="tilda"
+        style={{ textAlign: "center", fontSize: "2.5rem", paddingTop: 50 }}
+      >
+        Follow us
+      </h2>
+      <a href style={{ margin: "40px auto", width: 40, display: "block" }}>
+        <Instagram />
+      </a>
+      <ErrorBoundary>
+        <StyledFeed
+          userName="jfgrecords"
+          className="Feed"
+          classNameLoading="Loading"
+          limit="9"
+        />
+      </ErrorBoundary>
+    </div>
   )
 }

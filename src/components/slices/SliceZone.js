@@ -2,6 +2,7 @@ import * as React from "react"
 import FadeIn from "../FadeIn"
 import Copy from "./Copy"
 import CopyImage from "./CopyImage"
+import ImageBlock from "./ImageBlock"
 import ImageCopy from "./ImageCopy"
 import VideoCollection from "./VideoCollection"
 
@@ -28,6 +29,12 @@ export default function SliceZone({ slices }) {
         )
       case "Video Collection":
         return <VideoCollection key={i} data={s} />
+      case "Image":
+        return (
+          <FadeIn key={i}>
+            <ImageBlock data={s} />
+          </FadeIn>
+        )
       default:
         return null
     }

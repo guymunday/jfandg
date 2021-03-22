@@ -78,7 +78,7 @@ export default function Contact({ setContactOpen, toggleContactOpen }) {
     <>
       <ContactStyles id="contact">
         <ControlButton
-          style={{ position: "absolute", right: 30, top: 30 }}
+          style={{ position: "absolute", left: 30, top: 30 }}
           onClick={toggleContactOpen}
         >
           <Close />

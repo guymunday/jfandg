@@ -19,7 +19,6 @@ const BlockStyles = styled.div`
 `
 
 export default function ImageCopy({ data }) {
-  console.log(data)
   return (
     <>
       <BlockStyles>

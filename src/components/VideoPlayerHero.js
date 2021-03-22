@@ -11,7 +11,7 @@ import {
   Fullscreen,
   FullscreenExit,
 } from "@styled-icons/material"
-import MusicLinesSvg from "./MusicLinesSvg"
+import { GatsbyImage } from "gatsby-plugin-image"
 
 const VideoWrapper = styled.section`
   position: relative;
@@ -19,7 +19,12 @@ const VideoWrapper = styled.section`
   height: 100vh;
   min-height: 500px;
   overflow: hidden;
-  background: rgba(0, 0, 0, 0.1);
+  .backup-image {
+    display: none !important;
+    @media (max-aspect-ratio: 1/1) {
+      display: block !important;
+    }
+  }
 `
 
 export const ControlButton = styled.button`
@@ -47,7 +52,7 @@ const ScrubberContainer = styled.div`
   width: 60px;
   top: 0;
   right: 0;
-  background: linear-gradient(to left, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0));
+  background: linear-gradient(to left, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0));
   .scrubber-inner {
     position: absolute;
     top: 0;
@@ -86,7 +91,7 @@ const ScrubberContainer = styled.div`
   }
 `
 
-export default function VideoPlayer({ video }) {
+export default function VideoPlayer({ watchNow, setWatchNow, backupImage }) {
   const playerRef = React.useRef(null)
   const playerFullScreenRef = React.useRef(null)
 
@@ -102,8 +107,15 @@ export default function VideoPlayer({ video }) {
 
   React.useEffect(() => {
     setHasMounted(true)
-    console.log(hasMounted, "mounted")
   }, [])
+
+  React.useEffect(() => {
+    if (watchNow) {
+      setIsPlaying({ ...isPlaying, volume: 1 })
+    } else {
+      setIsPlaying({ ...isPlaying, volume: 0 })
+    }
+  }, [watchNow])
 
   const { playing, volume, played } = isPlaying
 
@@ -149,9 +161,20 @@ export default function VideoPlayer({ video }) {
       <VideoWrapper
         ref={playerFullScreenRef}
         style={{
-          background: isFullScreen ? "rgba(0,0,0,0)" : "rgba(0,0,0,0.3)",
+          background: isFullScreen ? "rgba(0,0,0,0)" : "rgba(0,0,0,0.5)",
         }}
       >
+        {/* {!watchNow && (
+          <GatsbyImage
+            image={backupImage?.gatsbyImageData}
+            alt={backupImage?.alt}
+            style={{
+              display: isFullScreen ? "none" : "block",
+              height: "100%",
+            }}
+            className="backup-image"
+          />
+        )} */}
         {hasMounted && (
           <ReactPlayer
             ref={playerRef}
@@ -191,7 +214,6 @@ export default function VideoPlayer({ video }) {
             />
             <ControlButton onClick={handleVolume}>
               {isPlaying.volume === 0 ? <VolumeUp /> : <VolumeMute />}
-              <MusicLinesSvg />
             </ControlButton>
             <ControlButton
               style={{ marginLeft: 20 }}
@@ -205,65 +227,3 @@ export default function VideoPlayer({ video }) {
     </>
   )
 }
-
-/*
-          <svg
-            style={{
-              position: "absolute",
-              transform: "rotate(-90deg)",
-              height: 90,
-              bottom: "-64%",
-              right: "8%",
-            }}
-            viewBox="0 0 159.38 256.85"
-          >
-            <line
-              x1="31.63"
-              y1="0.55"
-              x2="79.73"
-              y2="256.25"
-              style={{
-                fill: "none",
-                stroke: "#fff",
-                strokeLinecap: "round",
-                strokeWidth: 5,
-              }}
-            />
-            <line
-              x1="0.5"
-              y1="74.24"
-              x2="79.73"
-              y2="256.35"
-              style={{
-                fill: "none",
-                stroke: "#fff",
-                strokeLinecap: "round",
-                strokeWidth: 5,
-              }}
-            />
-            <line
-              x1="127.76"
-              y1="0.5"
-              x2="79.65"
-              y2="256.2"
-              style={{
-                fill: "none",
-                stroke: "#fff",
-                strokeLinecap: "round",
-                strokeWidth: 5,
-              }}
-            />
-            <line
-              x1="158.88"
-              y1="74.19"
-              x2="79.65"
-              y2="256.3"
-              style={{
-                fill: "none",
-                stroke: "#fff",
-                strokeLinecap: "round",
-                strokeWidth: 5,
-              }}
-            />
-          </svg>
-*/

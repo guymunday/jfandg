@@ -27,7 +27,7 @@ const HeroMenuStyles = styled.nav`
   }
 `
 
-const HeroButton = styled.button`
+const HeroButton = styled(Link)`
   font-family: inherit;
   background: none;
   outline: none;
@@ -37,12 +37,29 @@ const HeroButton = styled.button`
   color: #fff;
   transition: 0.2s ease-in color;
   cursor: pointer;
+  text-decoration: none;
   :hover {
-    color: gold !important;
+    color: var(--gold) !important;
   }
 `
 
-export default function HeroMenu({ setContactOpen, toggleContactOpen }) {
+const ContactButton = styled.button`
+  font-family: inherit;
+  background: none;
+  outline: none;
+  border: none;
+  font-size: 1.5rem;
+  text-transform: uppercase;
+  color: #fff;
+  transition: 0.2s ease-in color;
+  cursor: pointer;
+  text-decoration: none;
+  :hover {
+    color: var(--gold) !important;
+  }
+`
+
+export default function HeroMenu({ toggleContactOpen }) {
   useEffect(() => {
     gsap.from(".hero-link", {
       x: -300,
@@ -51,13 +68,6 @@ export default function HeroMenu({ setContactOpen, toggleContactOpen }) {
       ease: "power4.out",
     })
   }, [])
-
-  const pageChangeAnimation = () => {
-    return gsap.from(".page-wrapper", {
-      opacity: 0,
-      duration: 0.7,
-    })
-  }
 
   const menuData = useStaticQuery(graphql`
     {
@@ -78,19 +88,16 @@ export default function HeroMenu({ setContactOpen, toggleContactOpen }) {
     <>
       <HeroMenuStyles>
         {menuData?.menu?.edges?.map((item, i) => {
-          const itemLocation = `/${item?.node?.slug}/`
+          const itemLocation = `/${item?.node?.slug}`
           return (
             <>
               <div className="text-container" key={i}>
                 <HeroButton
                   className="hero-link"
-                  onClick={async () => {
-                    await navigate(`/${item?.node?.slug}`)
-                    await pageChangeAnimation()
-                  }}
+                  to={itemLocation}
                   style={{
                     color:
-                      location.pathname === itemLocation ? "gold" : "white",
+                      location.pathname === itemLocation ? "var(--gold)" : "white",
                   }}
                 >
                   {item?.node?.title}
@@ -100,9 +107,9 @@ export default function HeroMenu({ setContactOpen, toggleContactOpen }) {
           )
         })}
         <div className="text-container">
-          <HeroButton onClick={toggleContactOpen} className="hero-link">
+          <ContactButton onClick={toggleContactOpen} className="hero-link">
             Contact
-          </HeroButton>
+          </ContactButton>
         </div>
       </HeroMenuStyles>
     </>

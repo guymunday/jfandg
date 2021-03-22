@@ -25,7 +25,7 @@ const VideoThumbnail = styled.div`
     h4,
     h5,
     h6 {
-      color: gold;
+      color: var(--gold);
     }
   }
   .video-image {
