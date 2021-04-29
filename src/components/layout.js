@@ -49,7 +49,7 @@ export default function Layout({ children }) {
         toggleContactOpen={toggleContactOpen}
       />
       <main className="page-wrapper">{children}</main>
-      <InstaFeed />
+      {/* <InstaFeed /> */}
       <Footer />
       {contactOpen && (
         <Contact

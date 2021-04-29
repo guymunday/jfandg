@@ -118,8 +118,8 @@ export default function HeroNavigation({ setContactOpen, toggleContactOpen }) {
             />
 
             <Heading ref={headingRef}>
-              JF&G Picture Studios <br />
-              <span className="tilda script">Presents</span>
+              JF&G Pictures Studios <br />
+              Presents
             </Heading>
           </>
         )}

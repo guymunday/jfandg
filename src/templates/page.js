@@ -2,9 +2,9 @@ import * as React from "react"
 import { graphql } from "gatsby"
 import SliceZone from "../components/slices/SliceZone"
 import styled from "styled-components"
-import { gsap, ScrollToPlugin, ScrollTrigger } from "gsap/all"
+import { gsap, ScrollToPlugin } from "gsap/all"
 
-gsap.registerPlugin(ScrollToPlugin, ScrollTrigger)
+gsap.registerPlugin(ScrollToPlugin)
 
 const PageHeader = styled.div`
   padding: 60px 30px;
@@ -41,7 +41,7 @@ export default function Page({ location, data }) {
         }}
       >
         <PageHeader>
-          <h1 className="tilda">{data?.page?.title}</h1>
+          <h1>{data?.page?.title}</h1>
         </PageHeader>
         <SliceZone slices={data?.page?.contentBlocks} />
       </div>

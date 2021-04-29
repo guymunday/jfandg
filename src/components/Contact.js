@@ -24,7 +24,7 @@ const ContactStyles = styled.section`
       flex-direction: column;
     }
     .contact-copy {
-      h1,
+      /* h1,
       h2,
       h3,
       h4,
@@ -36,7 +36,7 @@ const ContactStyles = styled.section`
         font-weight: normal;
         text-transform: none;
         font-size: 3rem;
-      }
+      } */
     }
     form {
       display: flex;
@@ -89,15 +89,8 @@ export default function Contact({ toggleContactOpen }) {
             html={contactData?.contact?.copy}
             className="contact-copy"
           />
-          <form     method="POST"
-              data-netlify="true">
-            <input
-              type="text"
-              placeholder="NAME"
-              name="Name"
-          
-              required
-            />
+          <form method="POST" data-netlify="true">
+            <input type="text" placeholder="NAME" name="Name" required />
             <input type="email" placeholder="EMAIL" name="Email" />
             <textarea placeholder="MESSAGE" name="Message" />
             <span style={{ margin: "auto" }}>
